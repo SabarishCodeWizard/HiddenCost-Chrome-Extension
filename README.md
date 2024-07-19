@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Chrome extension allows users to scrape product information from e-commerce websites directly from their browser. It utilizes a popup interface for entering the product URL and provides real-time scraping functionality.
+This Chrome extension allows users to scrape product information from e-commerce websites directly from their browser. It utilizes a popup interface for entering the product URL and provides real-time scraping functionality click 👉 [You Tube](https://youtu.be/3X69VkNuC_8?si=QpKvAdOAtILiIn3N).
 
 ## Features
 
@@ -11,7 +11,7 @@ This Chrome extension allows users to scrape product information from e-commerce
 3. Utilizes background scripts for handling scraping requests and communicating with the Flask server.
 4. Provides real-time feedback on the product title and MRP through the extension popup.
 
-click 👉 [You Tube](https://youtu.be/3X69VkNuC_8?si=QpKvAdOAtILiIn3N)
+
 
 ## Installation
 
