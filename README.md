@@ -11,6 +11,7 @@ This Chrome extension allows users to scrape product information from e-commerce
 3. Utilizes background scripts for handling scraping requests and communicating with the Flask server.
 4. Provides real-time feedback on the product title and MRP through the extension popup.
 
+![image](https://github.com/user-attachments/assets/91ff1c28-0d03-45e2-9ccf-2ea095a64853)
 
 
 ## Installation
