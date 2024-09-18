@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login with Google</h1>
+  <button id="loginBtn">Login with Google</button>
+
+  <!-- Include Firebase -->
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBpdNsnBdInQv3mVsMvzr_PwDCOzRb3cw8",
+      authDomain: "extension-e7604.firebaseapp.com",
+      projectId: "extension-e7604",
+      storageBucket: "extension-e7604.appspot.com",
+      messagingSenderId: "321576555908",
+      appId: "1:321576555908:web:50526dece986898aaef9d1",
+      measurementId: "G-K0982J26ZY"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // Redirect to popup.html after successful login
+          window.location.href = "popup.html";
+        })
+        .catch((error) => {
+          console.error('Error during login:', error);
+        });
+    });
+
+    // Check if user is already logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // If already logged in, redirect to popup.html
+        window.location.href = "popup.html";
+      }
+    });
+  </script>
+</body>
+</html>

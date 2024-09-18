@@ -128,3 +128,9 @@ function demo(sendResponse) {
   // Return true to indicate that sendResponse will be called asynchronously
   return true;
 }
+
+
+// background.js
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("Extension installed");
+});

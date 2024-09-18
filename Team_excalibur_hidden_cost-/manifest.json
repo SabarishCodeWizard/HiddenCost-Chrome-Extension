@@ -10,7 +10,8 @@
     "activeTab",
     "storage",
     "tabs",
-    "notifications"
+    "notifications",
+    "identity"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -22,7 +23,7 @@
     "default_icon": {
       "128": "/images/default.png"
     },
-    "default_popup": "popup.html"
+    "default_popup": "login.html"
   },
   "content_scripts": [
     {
@@ -39,5 +40,8 @@
       ],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' https://www.gstatic.com https://www.googleapis.com; object-src 'self'"
+  }
 }
