@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Chrome Extension - Register</title>
-    <link rel="stylesheet" href="register.css">
-    <script src="firebase-init.js" type="module"></script> <!-- Include the Firebase initialization file -->
-    <script src="firebase-auth.js" type="module"></script> <!-- Include the Firebase auth file -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="register-container">
-        <h2>Register for Chrome Extension</h2>
-        <div id="error-message" class="error"></div>
-        <input type="email" id="register-email" placeholder="Email" required>
-        <input type="password" id="register-password" placeholder="Password" required>
-        <button id="register-btn" class="register-button">Register</button>
-        <p>Already have an account? <a href="login.html">Login here</a></p>
-    </div>
+  <div class="auth-container">
+    <h2>Register</h2>
+
+    <form id="register-form">
+      <input type="email" id="register-email" placeholder="Email" required />
+      <input type="password" id="register-password" placeholder="Password" required />
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script src="firebase-init.js"></script>
+  <script src="auth.js"></script>
 </body>
 </html>

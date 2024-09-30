@@ -1,25 +1,15 @@
 // firebase-init.js
 
-// Import necessary functions from Firebase SDK
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js';
-
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCGxYuVK8K5CYQAhbYbHf9VCkSfCdvEQSw",
-    authDomain: "mail-dc436.firebaseapp.com",
-    projectId: "mail-dc436",
-    storageBucket: "mail-dc436.appspot.com",
-    messagingSenderId: "34622970017",
-    appId: "1:34622970017:web:a92267616e006ae63078e0",
-    measurementId: "G-JYG2W6RKBN"
+  apiKey: "AIzaSyDdg-IirFVbsG9lwbHStq8chVAy_0U1o80",
+  authDomain: "extension-b7927.firebaseapp.com",
+  projectId: "extension-b7927",
+  storageBucket: "extension-b7927.appspot.com",
+  messagingSenderId: "999223446706",
+  appId: "1:999223446706:web:a1632d9584626092d20dab",
+  measurementId: "G-THKTDMPQ8E"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Export the auth and db objects to be used in other files
-export { auth, db };
+firebase.initializeApp(firebaseConfig);

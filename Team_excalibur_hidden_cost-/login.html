@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome Extension - Login</title>
-    <link rel="stylesheet" href="login.css">
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
-    <script src="firebase-init.js" type="module"></script> <!-- Include the Firebase initialization file -->
-    <script src="firebase-auth.js" type="module"></script> <!-- Include the Firebase auth file -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Chrome Extension</h2>
-        <div id="error-message" class="error"></div>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button id="login-btn" class="login-button">Sign in</button>
-        <p id="register-link" class="switch-text">Don't have an account? <a href="register.html">Register here.</a></p>
-    </div>
+  <div class="auth-container">
+    <h2>Login</h2>
+
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="separator">or</div>
+
+    <button id="google-signin" class="google-btn">Sign in with Google</button>
+
+    <p>Don't have an account? <a href="register.html">Register</a></p>
+  </div>
+
+  <!-- Load Firebase SDKs from local files -->
+  <script src="firebase/firebase-app.js"></script>
+  <script src="firebase/firebase-auth.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="firebase-init.js"></script>
+  <!-- Firebase Auth Logic -->
+  <script src="auth.js"></script>
 </body>
 </html>
