@@ -4,3 +4,4 @@ document.getElementById('submitUrl').addEventListener('click', function () {
         chrome.runtime.sendMessage({ action: 'openNewTab', url: url });
     });
 });
+

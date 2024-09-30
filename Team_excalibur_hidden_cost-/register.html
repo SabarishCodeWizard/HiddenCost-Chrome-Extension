@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chrome Extension - Register</title>
+    <link rel="stylesheet" href="register.css">
+    <script src="firebase-init.js" type="module"></script> <!-- Include the Firebase initialization file -->
+    <script src="firebase-auth.js" type="module"></script> <!-- Include the Firebase auth file -->
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register for Chrome Extension</h2>
+        <div id="error-message" class="error"></div>
+        <input type="email" id="register-email" placeholder="Email" required>
+        <input type="password" id="register-password" placeholder="Password" required>
+        <button id="register-btn" class="register-button">Register</button>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+</body>
+</html>

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="./css/login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Extension - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
+    <script src="firebase-init.js" type="module"></script> <!-- Include the Firebase initialization file -->
+    <script src="firebase-auth.js" type="module"></script> <!-- Include the Firebase auth file -->
 </head>
 <body>
-  <h1>Login</h1>
-  <button id="googleLogin" class="btn">Login with Google</button>
-
-  <!-- Reference the external script -->
-  <script type="module" src="login.js"></script>
+    <div class="login-container">
+        <h2>Chrome Extension</h2>
+        <div id="error-message" class="error"></div>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-btn" class="login-button">Sign in</button>
+        <p id="register-link" class="switch-text">Don't have an account? <a href="register.html">Register here.</a></p>
+    </div>
 </body>
 </html>
