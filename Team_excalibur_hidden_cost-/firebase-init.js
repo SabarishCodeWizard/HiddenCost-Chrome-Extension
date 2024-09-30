@@ -1,6 +1,11 @@
 // firebase-init.js
 
-// Firebase configuration
+// Load Firebase SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDdg-IirFVbsG9lwbHStq8chVAy_0U1o80",
   authDomain: "extension-b7927.firebaseapp.com",
@@ -12,4 +17,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore and Auth
+const db = getFirestore(app);
+const auth = getAuth(app);
