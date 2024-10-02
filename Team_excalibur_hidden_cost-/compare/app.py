@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-from bs4 import BeautifulSoup
-import requests
+from playwright.sync_api import sync_playwright
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -8,18 +7,35 @@ CORS(app)
 
 def get_flipkart_price(product_titles):
     flipkart_prices = []
-    for product_title in product_titles:
-        flipkart_url = f"https://www.flipkart.com/search?q={product_title.replace(' ', '+')}"
-        flipkart_selector = "._30jeq3"
-        response = requests.get(flipkart_url)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        price_element = soup.select_one(flipkart_selector)
-        if price_element:
-            # Extract text and remove currency symbol and commas
-            flipkart_price = price_element.text.strip().replace('₹', '').replace(',', '')
-            flipkart_prices.append(flipkart_price)
-        else:
-            flipkart_prices.append("Product not available on Flipkart")
+    
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        
+        for title in product_titles:
+            # Search for the product on Flipkart
+            page.goto(f"https://www.flipkart.com/search?q={title}")
+            page.wait_for_selector('div._1AtVbE')  # Wait for the main search results container
+            
+            # Now, select the first product listed
+            first_product = page.query_selector('div._1AtVbE div._2kHMtA')
+            if first_product:
+                first_product.click()
+                
+                # Wait for the product page to load and the price to be visible
+                page.wait_for_selector('div.Nx9bqj.CxhGGd')  # Updated price class
+                price_element = page.query_selector('div.Nx9bqj.CxhGGd')
+                
+                if price_element:
+                    price = price_element.inner_text()  # Extract the price text
+                    flipkart_prices.append(price)
+                else:
+                    flipkart_prices.append("Price not found")
+            else:
+                flipkart_prices.append("Product not found")
+        
+        browser.close()
+    
     return flipkart_prices
 
 
