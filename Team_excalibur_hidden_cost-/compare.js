@@ -1,3 +1,5 @@
+//compare.js
+
 document.addEventListener('DOMContentLoaded', function() {
   var compareButton = document.getElementById('compareButton');
   compareButton.addEventListener('click', function() {
@@ -30,7 +32,6 @@ function comparePrices() {
       displayComparison(data);
     })
     .catch(error => {
-      console.error('Error:', error);
       alert('An error occurred while fetching data. Please try again later.');
     });
   });
@@ -40,9 +41,12 @@ function displayComparison(data) {
   var resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "";
 
-  var flipkartPrices = data.flipkart_prices;
-  var amazonPrices = data.amazon_prices;
-  var comparisonResults = data.comparison_results;
+  // Log the received data to check the structure
+  console.log(data);  // Add this line for debugging
+
+  var flipkartPrices = data.flipkart_prices || [];
+  var amazonPrices = data.amazon_prices || [];
+  var comparisonResults = data.comparison_results || [];
 
   // Check if there is any data to display
   if (flipkartPrices.length === 0 || amazonPrices.length === 0 || comparisonResults.length === 0) {
