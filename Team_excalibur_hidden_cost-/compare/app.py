@@ -2,27 +2,44 @@ from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from flask_cors import CORS
+import time
+
 
 app = Flask(__name__)
 CORS(app)
 
+
 def get_flipkart_price(product_titles):
     flipkart_prices = []
     for product_title in product_titles:
-        cleaned_title = product_title.strip()  # Remove leading/trailing spaces
-        flipkart_url = f"https://www.flipkart.com/search?q={cleaned_title.replace(' ', '+')}"
-        response = requests.get(flipkart_url)
-        soup = BeautifulSoup(response.text, 'html.parser')
+        retry_count = 3
+        for attempt in range(retry_count):
+            try:
+                flipkart_url = f"https://www.flipkart.com/search?q={product_title.replace(' ', '+')}"
+                response = requests.get(flipkart_url, timeout=20)  # Increase timeout
+                if response.status_code != 200:
+                    flipkart_prices.append("Error: Flipkart site unavailable")
+                    break
 
-        # Escape the '+' in the class name by using '\\+'
-        price_element = soup.select_one('#container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(2) > div > div.x\\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd')
-        
-        if price_element:
-            flipkart_price = price_element.text.strip().replace('₹', '').replace(',', '')
-            flipkart_prices.append(flipkart_price)
-        else:
-            flipkart_prices.append("Product not available on Flipkart")
-    
+                soup = BeautifulSoup(response.text, 'html.parser')
+                price_element = soup.select_one('div._30jeq3._16Jk6d')
+
+                if price_element:
+                    flipkart_price = price_element.text.strip().replace('₹', '').replace(',', '')
+                    flipkart_prices.append(flipkart_price)
+                    break  # Success, no need to retry
+                else:
+                    flipkart_prices.append("Product not available on Flipkart")
+                    break
+            except requests.exceptions.Timeout:
+                if attempt < retry_count - 1:
+                    time.sleep(5)  # Wait for 5 seconds before retrying
+                    continue  # Retry the request
+                flipkart_prices.append(f"Error fetching price: Request timed out after {retry_count} attempts.")
+                break
+            except Exception as e:
+                flipkart_prices.append(f"Error fetching price: {str(e)}")
+                break
     return flipkart_prices
 
 
