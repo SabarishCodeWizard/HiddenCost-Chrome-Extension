@@ -42,8 +42,6 @@ def get_flipkart_price(product_titles):
                 break
     return flipkart_prices
 
-
-
 @app.route('/compare', methods=['POST'])
 def compare_prices():
     # Retrieve data from the request JSON
@@ -61,11 +59,12 @@ def compare_prices():
     for flipkart_price, amazon_price in zip(flipkart_prices, amazonProductPrices):
         if amazon_price is None:
             comparison_result = "Unable to compare. Amazon price not available."
-        elif flipkart_price == "Product not available on Flipkart":
+        elif flipkart_price == "Product not available on Flipkart" or "Error" in flipkart_price:
             comparison_result = "Price not available on Flipkart"
         else:
             try:
-                flipkart_price_float = float(flipkart_price.replace(',', ''))
+                # Check if the Flipkart price is valid before attempting to convert
+                flipkart_price_float = float(flipkart_price.replace(',', '').replace('₹', ''))
                 if flipkart_price_float < amazon_price:
                     comparison_result = "Flipkart price is lower than Amazon price."
                 elif flipkart_price_float > amazon_price:
@@ -84,6 +83,7 @@ def compare_prices():
     }
 
     return jsonify(response_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5010)
