@@ -1,143 +1,95 @@
 :root {
   --bg-color: #081b29;
   --secondary-bg-color: #112e42;
-  --text-color: #e0ffff;
-  --main-color: #00fa9a;
-  --bubble-animation: 0.4s ease-out;
+  --text-color: #E0FFFF;
+  --main-color: #00FA9A;
 }
+
 
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 10px;
-  background-color: var(--bg-color);
-  border: var(--text-color) solid 2px;
-  transition: background-color 0.3s ease;
-}
-
-.msger {
-  height: 560px;
-  width: 350px;
   background-color: var(--bg-color);
   color: var(--text-color);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  animation: slide-up 0.5s ease;
+  width: 300px;
 }
 
-.msger-header-title {
+#container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+}
+
+h1 {
   text-align: center;
-  margin-bottom: 20px;
+  color: var(--text-color);
 }
 
-.msger-chat {
-  height: calc(100% - 150px);
-  overflow-y: auto;
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+input[type="text"] {
+  width: 100%;
   padding: 10px;
-  scroll-behavior: smooth;
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.msg {
-  display: flex;
-  margin-bottom: 10px;
-  opacity: 0;
-  animation: fade-in var(--bubble-animation) forwards;
-}
-
-.left-msg .msg-bubble {
+  margin-bottom: 20px;
   border: 1px solid var(--main-color);
-  margin-right: auto;
-  transform: translateX(-10px);
-  animation: fade-slide-left var(--bubble-animation) forwards;
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+  color: var(--text-color);
 }
 
-.right-msg .msg-bubble {
-  background: var(--secondary-bg-color);
-  border: 1px solid var(--main-color);
-  margin-left: auto;
-  transform: translateX(10px);
-  animation: fade-slide-right var(--bubble-animation) forwards;
+button {
+  background-color: var(--main-color);
+  color: var(--bg-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
 }
 
-.msg-bubble {
-  border-radius: 15px;
-  padding: 10px 15px;
-  max-width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.msg-info {
-  margin-bottom: 5px;
-  font-size: 12px;
+button:hover {
+  background-color: var(--secondary-bg-color);
   color: var(--main-color);
 }
 
-.msg-text {
-  font-size: 14px;
+#results {
+  margin-top: 20px;
 }
 
-.msger-inputarea {
+.result {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+}
+
+.result h3 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.prices-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border: #e0ffff solid 2px;
-  border-radius: 35px;
-  background-color: var(--secondary-bg-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.msger-input {
-  flex: 1;
-  padding: 10px;
-  font-size: 12px;
-  border: 1px solid var(--main-color);
-  border-radius: 20px;
-  color: var(--text-color);
-  background-color: var(--secondary-bg-color);
-  transition: border-color 0.3s ease;
-}
-
-.msger-input:focus {
-  border-color: var(--main-color);
-  box-shadow: 0 0 5px var(--main-color);
-}
-
-.msger-send-btn {
-  padding: 10px 10px;
-  font-size: 14px;
-  background-color: var(--main-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-left: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.msger-send-btn:hover {
-  background-color: #32cd99;
-  transform: scale(1.05);
-}
-
-.msger-header-title {
+.prices-container .result {
+  flex-grow: 1;
   text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--text-color);
 }
 
 .back_button {
   font-size: 2.4rem;
   color: var(--main-color);
-  transition: 0.5s;
+  /* Changed from --bg-color to --main-color */
+  transition: .5s;
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -162,51 +114,9 @@ body {
 
 .back_button:hover {
   color: var(--bg-color);
+  /* Changed from --main-color to --bg-color */
 }
 
 .back_button:hover::before {
   transform: scaleX(1);
-}
-
-/* Keyframes for Animations */
-@keyframes slide-up {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-slide-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fade-slide-right {
-  0% {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
