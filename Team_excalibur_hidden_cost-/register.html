@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="./css/popup.css">
 </head>
+
 <body>
   <div class="auth-container">
     <h2>Register</h2>
@@ -25,5 +28,33 @@
   <script src="firebase/firebase-firestore-compat.js"></script>
   <script src="firebase-init.js"></script>
   <script src="auth.js"></script>
+  <style>
+    form {
+      margin: 20px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </body>
+
 </html>
