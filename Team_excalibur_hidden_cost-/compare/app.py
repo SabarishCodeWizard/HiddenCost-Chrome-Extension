@@ -11,7 +11,7 @@ async def get_flipkart_price(product_titles):
     flipkart_prices = []
     
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)  # Run browser in headless mode
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
         for product_title in product_titles:
@@ -20,12 +20,31 @@ async def get_flipkart_price(product_titles):
             
             try:
                 await page.goto(flipkart_url)
-                # Wait for the price element to load using the provided selector
-                await page.wait_for_selector('container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd', timeout=15000)
-                # Extract price text
-                price_element = await page.text_content('container > div > div._39kFie.N3De93.JxFEK3._48O0EI > div.DOjaWF.YJG4Cf > div.DOjaWF.gdgoEp.col-8-12 > div:nth-child(3) > div > div.x\\+7QT1 > div.UOCQB1 > div > div.Nx9bqj.CxhGGd')
-                price = price_element.strip().replace('₹', '').replace(',', '')
-                flipkart_prices.append(price)
+                
+                # Wait for the product container to appear (use a more specific wait)
+                await page.wait_for_selector('//div[contains(@class, "_1AtVbE")]', timeout=45000)
+                
+                # Try to extract the first product price
+                product_cards = await page.query_selector_all('//div[contains(@class, "_1AtVbE")]')
+
+                # Iterate through the product cards to find price and title
+                for card in product_cards:
+                    title_element = await card.query_selector('a > div:nth-child(3) > div:nth-child(1)')
+                    price_element = await card.query_selector('a > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
+                    
+                    if title_element and price_element:
+                        title_text = await title_element.text_content()
+                        price_text = await price_element.text_content()
+                        
+                        # Clean and extract the price
+                        price = price_text.strip().replace('₹', '').replace(',', '')
+                        
+                        flipkart_prices.append(price)
+                        break  # Exit after finding the first valid product
+                
+                if not flipkart_prices:
+                    flipkart_prices.append('Error: No price found for this product.')
+                
             except Exception as e:
                 flipkart_prices.append(f"Error fetching price: {str(e)}")
         
@@ -34,20 +53,23 @@ async def get_flipkart_price(product_titles):
     return flipkart_prices
 
 
-# New endpoint to fetch Flipkart prices only
-@app.route('/fetch_flipkart', methods=['POST'])
-def fetch_flipkart_prices():
-    request_data = request.json
-    product_titles = request_data.get('product_titles')
 
-    # Fetch Flipkart prices using Playwright
-    flipkart_prices = asyncio.run(get_flipkart_price(product_titles))
 
-    response_data = {
-        'flipkart_prices': flipkart_prices
-    }
 
-    return jsonify(response_data)
+# # New endpoint to fetch Flipkart prices only
+# @app.route('/fetch_flipkart', methods=['POST'])
+# def fetch_flipkart_prices():
+#     request_data = request.json
+#     product_titles = request_data.get('product_titles')
+
+#     # Fetch Flipkart prices using Playwright
+#     flipkart_prices = asyncio.run(get_flipkart_price(product_titles))
+
+#     response_data = {
+#         'flipkart_prices': flipkart_prices
+#     }
+
+#     return jsonify(response_data)
 
 # Comparison endpoint (remains unchanged)
 @app.route('/compare', methods=['POST'])
