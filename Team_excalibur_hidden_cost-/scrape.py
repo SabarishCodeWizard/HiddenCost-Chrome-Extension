@@ -1,7 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.edge.options import Options as EdgeOptions
 import time
 
@@ -19,20 +21,13 @@ try:
     time.sleep(5)  # Wait for the page to load
 
     # Step 2: Click on the 'Buy Now' button
-    buy_now_button = WebDriverWait(driver, 15).until(
+    buy_now_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.ID, "buy-now-button"))
     )
     buy_now_button.click()
 
     # Step 3: Wait for checkout page to load and select 'Cash on Delivery' payment method
-    time.sleep(5)  # Adjust if necessary for page load time
-
-    # Switch to iframe if necessary (check if element is in iframe)
-    # Uncomment the next line if element is inside an iframe
-    # driver.switch_to.frame(driver.find_element(By.XPATH, "//iframe[@id='desired-iframe-id']"))
-
-    # Debug: Print page source to verify if page loaded correctly
-    # print(driver.page_source)  # Use this to inspect if elements are loaded properly
+    time.sleep(3)  # Adjust if necessary for page load time
 
     # Find and click on 'Cash on Delivery/Pay on Delivery'
     cod_payment_option = WebDriverWait(driver, 40).until(
@@ -45,7 +40,7 @@ try:
         EC.element_to_be_clickable((By.XPATH, "//*[@id='pp-QPHVev-164']/span/input"))
     )
     use_this_payment_button.click()
-
+    
     time.sleep(3)  # Allow page to update
 
     # Step 5: Scrape delivery and total order amounts
@@ -66,11 +61,6 @@ try:
         'Delivery:': delivery_amount,
         'Total:': order_total
     }
-
-except Exception as e:
-    print(f"An error occurred: {str(e)}")
-    # Optionally print the page source for debugging
-    print(driver.page_source)
 
 finally:
     # Close the browser
