@@ -1,3 +1,6 @@
+//background.js
+
+
 let isHighlighting = false;
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

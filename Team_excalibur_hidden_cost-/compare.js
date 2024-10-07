@@ -53,38 +53,47 @@ function displayComparison(data) {
   var resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = ""; // Clear previous results
 
-  var flipkartPrices = data.flipkart_prices || [];
+  var flipkartData = data.flipkart_data || [];
   var amazonPrices = data.amazon_prices || [];
   var comparisonResults = data.comparison_results || [];
 
-  // Check if there's valid data
-  if (flipkartPrices.length === 0 || amazonPrices.length === 0 || comparisonResults.length === 0) {
+  if (flipkartData.length === 0 || amazonPrices.length === 0 || comparisonResults.length === 0) {
     alert("No data available for comparison.");
     return;
   }
 
-  // Create and display Amazon result
-  var amazonResult = document.createElement("div");
-  amazonResult.classList.add("result");
-  amazonResult.innerHTML = "<h3>Amazon</h3><p>" + amazonPrices[0] + "</p>";
-  resultsDiv.appendChild(amazonResult);
+  // Loop through the data and display results for each product
+  for (let i = 0; i < flipkartData.length; i++) {
+    let flipkartInfo = flipkartData[i];
 
-  // Create and display Flipkart result
-  var flipkartResult = document.createElement("div");
-  flipkartResult.classList.add("result");
-  flipkartResult.innerHTML = "<h3>Flipkart</h3><p>" + flipkartPrices[0] + "</p>";
-  resultsDiv.appendChild(flipkartResult);
+    // Display Amazon price
+    var amazonResult = document.createElement("div");
+    amazonResult.classList.add("result");
+    amazonResult.innerHTML = "<h3>Amazon</h3><p>" + amazonPrices[i] + "</p>";
+    resultsDiv.appendChild(amazonResult);
 
-  // Create and display price difference
-  var priceDifference = document.createElement("div");
-  priceDifference.classList.add("result");
-  var difference = Math.abs(parseFloat(amazonPrices[0]) - parseFloat(flipkartPrices[0])); 
-  priceDifference.innerHTML = "<h3>Price Difference</h3><p>" + difference + "</p>";
-  resultsDiv.appendChild(priceDifference);
+    // Display Flipkart price, MRP, and offer percentage
+    var flipkartResult = document.createElement("div");
+    flipkartResult.classList.add("result");
+    flipkartResult.innerHTML = `
+      <h3>Flipkart</h3>
+      <p>Price: ${flipkartInfo.price}</p>
+      <p>MRP: ${flipkartInfo.mrp}</p>
+      <p>Offer: ${flipkartInfo.offer_percentage}</p>
+    `;
+    resultsDiv.appendChild(flipkartResult);
 
-  // Create and display comparison result
-  var comparisonMessage = document.createElement("div");
-  comparisonMessage.classList.add("result");
-  comparisonMessage.innerHTML = "<h3 class='compare'>Comparison Result</h3><p>" + comparisonResults[0] + "</p>";
-  resultsDiv.appendChild(comparisonMessage);
+    // Calculate price difference
+    var priceDifference = document.createElement("div");
+    priceDifference.classList.add("result");
+    var difference = Math.abs(parseFloat(amazonPrices[i]) - parseFloat(flipkartInfo.price));
+    priceDifference.innerHTML = "<h3>Price Difference</h3><p>" + difference + "</p>";
+    resultsDiv.appendChild(priceDifference);
+
+    // Display comparison result
+    var comparisonMessage = document.createElement("div");
+    comparisonMessage.classList.add("result");
+    comparisonMessage.innerHTML = "<h3 class='compare'>Comparison Result</h3><p>" + comparisonResults[i] + "</p>";
+    resultsDiv.appendChild(comparisonMessage);
+  }
 }
