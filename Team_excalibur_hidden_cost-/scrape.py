@@ -1,11 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.edge.options import Options as EdgeOptions
 import time
+
+# Replace these with your Amazon credentials
+amazon_email = "sabarish.it22@bitsathy.ac.in"
+amazon_password = "Sabarish@2005"
 
 # Initialize Edge WebDriver
 edge_options = EdgeOptions()
@@ -26,24 +28,59 @@ try:
     )
     buy_now_button.click()
 
-    # Step 3: Wait for checkout page to load and select 'Cash on Delivery' payment method
+    # Step 3: Login to Amazon (phone number/email and password)
+    email_input = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "ap_email"))
+    )
+    email_input.send_keys(amazon_email)
+
+    continue_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "continue"))
+    )
+    continue_button.click()
+
+    password_input = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "ap_password"))
+    )
+    password_input.send_keys(amazon_password)
+
+    login_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "signInSubmit"))
+    )
+    login_button.click()
+
+    # Step 4: Wait for checkout page to load and select 'Cash on Delivery' payment method
     time.sleep(3)  # Adjust if necessary for page load time
 
-    # Find and click on 'Cash on Delivery/Pay on Delivery'
-    cod_payment_option = WebDriverWait(driver, 40).until(
-        EC.element_to_be_clickable((By.XPATH, "//*[@id='pp-QPHVev-161']/div/div/div/div/div[2]/div[1]/div/span[1]"))
-    )
-    cod_payment_option.click()
+    # Check if inside an iframe (optional check)
+    iframes = driver.find_elements(By.TAG_NAME, 'iframe')
+    if iframes:
+        print("Switching to iframe")
+        driver.switch_to.frame(iframes[0])
 
-    # Step 4: Click 'Use this payment method'
+    # Debug: Print page source for troubleshooting
+    with open("checkout_page.html", "w", encoding="utf-8") as f:
+        f.write(driver.page_source)
+    print("Page source saved for debugging!")
+
+    # Find and select the 'Cash on Delivery/Pay on Delivery' radio button
+    cod_payment_radio = WebDriverWait(driver, 40).until(
+        EC.element_to_be_clickable((By.XPATH, "//input[@type='radio' and contains(@value, 'Cash on Delivery')]"))
+    )
+    cod_payment_radio.click()
+
+    # Step 5: Click 'Use this payment method'
     use_this_payment_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//*[@id='pp-QPHVev-164']/span/input"))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='ppw-widgetEvent:SetPaymentPlanSelectContinue']"))
     )
     use_this_payment_button.click()
-    
+
     time.sleep(3)  # Allow page to update
 
-    # Step 5: Scrape delivery and total order amounts
+    # Step 6: Wait for delivery and total order amounts to be updated
+    time.sleep(10)  # Add extra wait time to ensure the page updates fully
+
+    # Step 7: Scrape delivery and total order amounts
     delivery_amount = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "#subtotals-marketplace-table > tbody > tr:nth-child(2) > td.a-text-right.aok-nowrap.a-nowrap"))
     ).text
@@ -52,15 +89,9 @@ try:
         EC.visibility_of_element_located((By.CSS_SELECTOR, "#subtotals-marketplace-table > tbody > tr:nth-child(4) > td.a-color-price.a-size-medium.a-text-right.grand-total-price.aok-nowrap.a-text-bold.a-nowrap"))
     ).text
 
-    # Step 6: Print the scraped amounts
+    # Step 8: Print the scraped amounts
     print(f"Delivery Amount: {delivery_amount}")
     print(f"Order Total Amount: {order_total}")
-
-    # Optional: Return these values in your response to be handled in Chrome Extension
-    result = {
-        'Delivery:': delivery_amount,
-        'Total:': order_total
-    }
 
 finally:
     # Close the browser
