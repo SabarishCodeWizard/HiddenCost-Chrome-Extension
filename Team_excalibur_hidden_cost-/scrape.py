@@ -52,27 +52,27 @@ try:
     # Step 4: Wait for checkout page to load and select 'Cash on Delivery' payment method
     time.sleep(3)  # Adjust if necessary for page load time
 
-    # Check if inside an iframe (optional check)
+    # Check for iframe and switch
     iframes = driver.find_elements(By.TAG_NAME, 'iframe')
     if iframes:
         print("Switching to iframe")
         driver.switch_to.frame(iframes[0])
 
-    # Debug: Print page source for troubleshooting
-    with open("checkout_page.html", "w", encoding="utf-8") as f:
-        f.write(driver.page_source)
-    print("Page source saved for debugging!")
-
-    # Find and select the 'Cash on Delivery/Pay on Delivery' radio button
+    # Try clicking the COD radio button
     cod_payment_radio = WebDriverWait(driver, 40).until(
         EC.element_to_be_clickable((By.XPATH, "//input[@type='radio' and contains(@value, 'Cash on Delivery')]"))
     )
+    driver.execute_script("arguments[0].scrollIntoView(true);", cod_payment_radio)  # Scroll into view if needed
     cod_payment_radio.click()
 
+    # Switch back from iframe if necessary
+    driver.switch_to.default_content()
+
     # Step 5: Click 'Use this payment method'
-    use_this_payment_button = WebDriverWait(driver, 10).until(
+    use_this_payment_button = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='ppw-widgetEvent:SetPaymentPlanSelectContinue']"))
     )
+    driver.execute_script("arguments[0].scrollIntoView(true);", use_this_payment_button)  # Scroll into view if needed
     use_this_payment_button.click()
 
     time.sleep(3)  # Allow page to update
