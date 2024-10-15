@@ -10,45 +10,33 @@ import spacy
 
 app = Flask(__name__)
 
-# Download spaCy English model
+
 spacy.cli.download("en_core_web_sm")
 
-# Load the English NLP model
+
 nlp = spacy.load("en_core_web_sm")
 
-# Define the new file ID from the updated Google Drive link
-# new_file_id = '1OTfNifGO_71pl1f8X2N-a0M4PaZhiDZd'
 
-# # Construct the new download link
-# new_download_link = f'https://drive.google.com/uc?id={new_file_id}'
+destination_path = 'output.csv'  
 
-# # Make a request to download the new file
-# response = requests.get(new_download_link)
-# # Save the downloaded file to the destination path
-destination_path = 'output.csv'  # Modify the destination path as needed
-# with open(destination_path, 'wb') as f:
-#     f.write(response.content)
-
-# Load the dataset from the updated CSV file
 df = pd.read_csv(destination_path, encoding='latin-1')
 
-# Split the dataset into training and testing sets
+
 train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
 
-# Extract features from 'text' column using TF-IDF vectorizer
 vectorizer = TfidfVectorizer(stop_words='english')
 X_train = vectorizer.fit_transform(train_df['text'])
 
-# Extract labels from 'label' column
+
 y_train = train_df['label']
 
-# Use Support Vector Machine with GridSearch for hyperparameter tuning
+
 param_grid = {'C': [0.1, 1, 10], 'kernel': ['linear', 'rbf', 'poly'], 'gamma': ['scale', 'auto']}
 svm_clf = SVC(random_state=42)
 grid_search = GridSearchCV(svm_clf, param_grid, cv=3, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
-# Get the best model from the grid search
+
 best_svm_model = grid_search.best_estimator_
 
 def scrape_website_text(url):
@@ -58,7 +46,7 @@ def scrape_website_text(url):
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
-        time.sleep(2)  # Add a delay to avoid overloading the server
+        time.sleep(2)  
         soup = BeautifulSoup(response.text, 'html.parser')
         text_data = [element.get_text(strip=True) for element in soup.find_all(True)]
         return text_data
@@ -90,12 +78,12 @@ def identify_dark_patterns(text_data, dark_patterns_column):
         identified_patterns_list.append(identified_patterns.tolist())
     return identified_patterns_list
 
-# Flask route for the home page
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Flask route for processing the form submission
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -124,7 +112,7 @@ def predict():
                 'Pattern_Category': test_df['Pattern Category'].tolist()[:min_length]
             })
 
-            # Adjust predictions based on Pattern Category
+         
             result_df['Prediction'] = result_df.apply(lambda row: 0 if row['Pattern_Category'] == 'Not Dark Pattern' else 1, axis=1)
 
             correct_predictions_df = result_df[result_df['Prediction'] == 1].drop_duplicates(subset=['Text'])
