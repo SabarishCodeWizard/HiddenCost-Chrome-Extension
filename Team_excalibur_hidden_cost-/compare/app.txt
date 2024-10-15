@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.edge.options import Options  # Import Edge options
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
@@ -13,15 +12,8 @@ CORS(app)
 def get_flipkart_price(product_titles):
     flipkart_data = []
     
-    # Setup Edge options for headless mode
-    edge_options = Options()
-    edge_options.add_argument('--headless')  # Run in headless mode
-    edge_options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
-    edge_options.add_argument('--no-sandbox')  # Required for running as root user in some environments
-    edge_options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource problems
-    
-    # Initialize the Edge WebDriver with the headless options
-    driver = webdriver.Edge(options=edge_options)
+    # Specify the path to the Edge WebDriver if not in PATH
+    driver = webdriver.Edge()  # Edge WebDriver initialization
     
     for product_title in product_titles:
         flipkart_url = f"https://www.flipkart.com/search?q={product_title.replace(' ', '+')}"
