@@ -27,17 +27,18 @@
 
         /* Font */
         body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Add this */
-        height: 70vh; /* Add this */
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        padding: 20px;
-        width: 500px;
-        margin-left: 30%;
-    }
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            width: 500px;
+            margin-left: 30%;
+            animation: fadeIn 2s ease-in-out;
+        }
 
         h1 {
             display: block;
@@ -47,6 +48,7 @@
             background-color: var(--secondary-bg-color);
             padding: 30px 0px;
             border-radius: 10px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         /* Form */
@@ -54,6 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation: fadeIn 2s ease-in-out;
         }
 
         label {
@@ -98,11 +101,21 @@
             color: var(--main-color);
         }
 
-        .footer{
+        .footer {
             margin-top: 90px;
             text-align: end;
+            animation: fadeIn 2s ease-in-out;
         }
 
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
