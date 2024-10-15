@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function comparePrices() {
+  // Show the loading indicator
+  var loadingIndicator = document.getElementById('loadingIndicator');
+  loadingIndicator.style.display = 'block';
+
   chrome.storage.local.get(['amazonProductTitles', 'amazonProductPrices'], function (result) {
     let amazonProductTitles = result.amazonProductTitles;
     let amazonProductPrices = result.amazonProductPrices;
@@ -17,6 +21,7 @@ function comparePrices() {
 
     if (!amazonProductTitles.length || !amazonProductPrices.length) {
       alert('Amazon product data is not available. Please set the product title and price.');
+      loadingIndicator.style.display = 'none'; // Hide loading indicator
       return;
     }
 
@@ -39,13 +44,16 @@ function comparePrices() {
     .then(data => {
       console.log(data); // Log the response to check what data you are getting
       displayComparison(data);
+      loadingIndicator.style.display = 'none'; // Hide loading indicator after results are displayed
     })
     .catch(error => {
       console.error('Error:', error);
       alert('An error occurred while fetching data. Please try again later.');
+      loadingIndicator.style.display = 'none'; // Hide loading indicator
     });
   });
 }
+
 
 
 
