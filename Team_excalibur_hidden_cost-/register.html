@@ -11,7 +11,9 @@
 
 <body>
   <div class="auth-container">
-    <h2 class="heading">Register</h2>
+    <div class="text-animate">
+      <h3>Register</h3>
+    </div>
 
     <form id="register-form">
       <input type="email" id="register-email" placeholder="Email" required />
@@ -53,6 +55,58 @@
 
     button:hover {
       background-color: #45a049;
+    }
+
+    /* animate */
+
+    .text-animate {
+      position: relative;
+
+    }
+
+    .text-animate h3 {
+      font-size: 25px;
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: .7px var(--main-color);
+      background-image: -webkit-linear-gradient(var(--main-color));
+      background-image: linear-gradient(var(--main-color), var(--main-color));
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-position: 0 0;
+      text-align: center;
+
+    }
+
+    .text-animate h3 {
+      animation: homeBgText 6s linear infinite;
+      animation-delay: 2s;
+    }
+
+    .text-animate h3::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-right: 2px solid var(--main-color);
+      z-index: -1;
+    }
+
+    @keyframes homeBgText {
+
+      0%,
+      10%,
+      100% {
+        background-position: -33rem 0;
+      }
+
+      65%,
+      85% {
+        background-position: 0 0;
+      }
     }
   </style>
 </body>

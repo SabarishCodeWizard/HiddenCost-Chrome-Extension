@@ -76,12 +76,12 @@ function fetchAndDisplayValues() {
 
 function displayAmazonValues(result) {
   const amazonElements = ['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice', 'deliveryAmount', 'orderTotalAmount'];
-  document.getElementById('amazonFullPrice').innerHTML = '<h2>Amazon Full Price:</h2><p>₹' + result.amazonFullPrice.join(', ') + '</p>';
-  document.getElementById('amazonProductPrices').innerHTML = '<h2>Amazon Displayed Prices:</h2><p>₹' + result.amazonProductPrices.join(', ') + '</p>';
-  document.getElementById('amazonPriceDifference').innerHTML = '<h2>Amazon Price Difference:</h2><p>₹' + result.amazonPriceDifference.join(', ') + '</p>';
-  document.getElementById('discountDifference').innerHTML = '<h2>Amazon Discount Difference:</h2><p>₹-80</p>';
+  document.getElementById('amazonFullPrice').innerHTML = '<h2>MRP on Amazon:</h2><p>₹' + result.amazonFullPrice.join(', ') + '</p>';
+  document.getElementById('amazonProductPrices').innerHTML = '<h2>Displayed Prices on Amazon:</h2><p>₹' + result.amazonProductPrices.join(', ') + '</p>';
+  document.getElementById('amazonPriceDifference').innerHTML = '<h2>Correct Calculation:</h2><p>₹' + result.amazonPriceDifference.join(', ') + '</p>';
+  document.getElementById('discountDifference').innerHTML = '<h2>Amazon Discount Difference:</h2><p>-0.7</p>';
   document.getElementById('deliveryAmount').innerHTML = '<h2>Amazon Delivery Amount:</h2><p>₹40</p>';
-  document.getElementById('orderTotalAmount').innerHTML = '<h2>Amazon Total Amount:</h2><p>₹16999</p>';
+  document.getElementById('orderTotalAmount').innerHTML = '<h2>Amazon Total Amount:</h2><p>₹339</p>';
   document.getElementById('amazonComparePrice').innerHTML = '<h1>' + result.amazonComparePrice.join(', ') + '</h1>';
   updateIconAndTextColor(result.amazonComparePrice, 'amazonComparePrice');
   toggleElementsDisplay(amazonElements, 'block');
@@ -143,3 +143,31 @@ function toggleElementsDisplay(elementIds, display) {
     }
   });
 }
+
+window.onload = function () {
+  chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { message: "popup_open" });
+  });
+
+  document.getElementsByClassName("analyze-button")[0].onclick = function () {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { message: "analyze_site" });
+    });
+  };
+
+  document.getElementsByClassName("link")[0].onclick = function () {
+    chrome.tabs.create({
+      url: document.getElementsByClassName("link")[0].getAttribute("href"),
+    });
+  };
+};
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "update_current_count") {
+    document.getElementsByClassName("number")[0].textContent = (request.count/10).toFixed(0);
+  }
+});
+
+document.querySelector('.analyze-button').addEventListener('click', function () {
+  document.querySelector('.number').textContent = 'Detecting...';
+});

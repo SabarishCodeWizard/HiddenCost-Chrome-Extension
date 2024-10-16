@@ -33,7 +33,7 @@
                 "content.js",
                 "js/common.js",
                 "js/block_segment.js"
-            ],
+            ],  
             "css": [
                 "css/insite.css"
             ],

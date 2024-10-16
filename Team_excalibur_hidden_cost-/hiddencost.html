@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,15 +29,55 @@
             text-align: center;
         }
 
-        .header {
-            background-color: var(--secondary-bg-color);
-            color: #ffffff;
-            padding: 6px;
-            border-radius: 5px 5px 0 0;
+        /* animate */
+
+        .text-animate {
+            position: relative;
+
         }
 
-        .header h1 {
-            margin: 0;
+        .text-animate h3 {
+            font-size: 25px;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: .7px var(--main-color);
+            background-image: -webkit-linear-gradient(var(--main-color));
+            background-image: linear-gradient(var(--main-color), var(--main-color));
+            background-repeat: no-repeat;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-position: 0 0;
+
+        }
+
+        .text-animate h3 {
+            animation: homeBgText 6s linear infinite;
+            animation-delay: 2s;
+        }
+
+        .text-animate h3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            border-right: 2px solid var(--main-color);
+            z-index: -1;
+        }
+
+        @keyframes homeBgText {
+
+            0%,
+            10%,
+            100% {
+                background-position: -33rem 0;
+            }
+
+            65%,
+            85% {
+                background-position: 0 0;
+            }
         }
 
         .main-content {
@@ -137,15 +178,21 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <a class="back_button" href="popup.html"><i class='bx bx-left-arrow-alt'></i></a>
     <div class="popup-container">
-        <div class="header">
+        <div class="text-animate">
             <h3>Hidden Cost Identifier</h3>
         </div>
         <div class="main-content">
@@ -155,7 +202,7 @@
                 <span class="slider"></span>
             </label>
         </div>
-        
+
         <div class="loader-container"></div>
         <div class="result" id="result_section">
             <div class="loader" id="loader"></div>
@@ -183,4 +230,5 @@
 
     <script src="hiddencost.js"></script>
 </body>
-</html
+
+</html>
