@@ -4,6 +4,9 @@
 
 This Chrome extension allows users to scrape product information from e-commerce websites directly from their browser. It utilizes a popup interface for entering the product URL and provides real-time scraping functionality click 👉 [You Tube](https://youtu.be/3X69VkNuC_8?si=QpKvAdOAtILiIn3N).
 
+## Project Link
+You can view the project [here](https://drive.google.com/file/d/1U50r-Ailh9SyInWPpGwikTAgF9Acui4y/view?usp=sharing).
+
 ## Features
 
 1. Scrapes product information from popular e-commerce platforms such as Flipkart, Amazon, and Meesho.
