@@ -10,14 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const password = document.getElementById('password').value;
 
             auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    console.log('Logged in:', userCredential.user);
-                    window.location.href = "popup.html"; // Redirect to popup.html
-                })
-                .catch((error) => {
-                    console.error('Error logging in:', error);
-                    alert("Error logging in: " + error.message);
-                });
+            .then((userCredential) => {
+                console.log('Logged in:', userCredential.user);
+                // Store user info in localStorage
+                localStorage.setItem('user', JSON.stringify({ email: userCredential.user.email }));
+                window.location.href = "popup.html"; // Redirect to popup.html
+            })
+            .catch((error) => {
+                console.error('Error logging in:', error);
+                alert("Error logging in: " + error.message);
+            });
         });
     }
 
@@ -28,14 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const provider = new firebase.auth.GoogleAuthProvider();
 
             auth.signInWithPopup(provider)
-                .then((result) => {
-                    console.log('Google sign-in:', result.user);
-                    window.location.href = "popup.html"; // Redirect to popup.html
-                })
-                .catch((error) => {
-                    console.error('Error during Google sign-in:', error);
-                    alert("Error during Google sign-in: " + error.message);
-                });
+            .then((result) => {
+                console.log('Google sign-in:', result.user);
+                // Store user info in localStorage
+                localStorage.setItem('user', JSON.stringify({ email: result.user.email }));
+                window.location.href = "popup.html"; // Redirect to popup.html
+            })
+            .catch((error) => {
+                console.error('Error during Google sign-in:', error);
+                alert("Error during Google sign-in: " + error.message);
+            });
         });
     }
     const registerForm = document.getElementById('register-form');

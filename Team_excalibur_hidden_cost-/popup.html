@@ -1,3 +1,5 @@
+<!-- popup.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +12,14 @@
 </head>
 
 <body>
+    <div id="user-info">
+        <p id="welcome-message"></p>
+        <button id="logout-button" style="display:none;">Logout</button>
+    </div>
     <h1 class="heading">Welcome to our Extension</h1>
     <p>This extension empowers you to recognize and avoid deceptive design techniques known as dark patterns commonly
         found on e-commerce websites.</p>
+
     <div class="btn-box">
         <div class="up_box">
             <a class="btn" href="hiddencost.html">Identify Hidden Costs</a>
@@ -48,6 +55,11 @@
         </p>
     </footer>
 </body>
+<script src="firebase/firebase-app-compat.js"></script>
+<script src="firebase/firebase-auth-compat.js"></script>
+<script src="firebase/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
+<script src="auth.js"></script>
 <script src="popup.js"></script>
 <script src="firebase/crypto-js.min.js"></script>
 
