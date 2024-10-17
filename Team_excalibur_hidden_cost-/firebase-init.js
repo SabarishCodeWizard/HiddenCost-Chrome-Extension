@@ -1,14 +1,19 @@
 // firebase-init.js
 
+// Load environment variables
+if (!window.env) {
+    throw new Error("Environment variables not loaded.");
+}
+
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyDdg-IirFVbsG9lwbHStq8chVAy_0U1o80",
-    authDomain: "extension-b7927.firebaseapp.com",
-    projectId: "extension-b7927",
-    storageBucket: "extension-b7927.appspot.com",
-    messagingSenderId: "999223446706",
-    appId: "1:999223446706:web:a1632d9584626092d20dab",
-    measurementId: "G-THKTDMPQ8E"
+    apiKey: window.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: window.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: window.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: window.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: window.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: window.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: window.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
