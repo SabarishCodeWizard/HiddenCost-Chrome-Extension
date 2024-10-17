@@ -1,3 +1,5 @@
+// auth.js
+
 document.addEventListener('DOMContentLoaded', function () {
     // Login form
     const loginForm = document.getElementById('login-form');
@@ -36,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
-
-    // Register form
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match');
+                return;
+            }
+
+            // Validate the email using ZeroBounce API
+            const isEmailValid = await validateEmailWithZeroBounce(email);
+            console.log('Is email valid:', isEmailValid); // Debugging line
+            if (!isEmailValid) {
+                alert('Invalid email address. Please use a valid email.');
                 return;
             }
 
@@ -80,5 +88,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert("Error registering: " + error.message);
             }
         });
+    }
+
+    // Function to validate email using ZeroBounce API
+    async function validateEmailWithZeroBounce(email) {
+        const apiKey = 'fd9b5c9bf5c14840930b8a87c96e454f'; // Replace with your ZeroBounce API Key
+        const apiUrl = `https://api.zerobounce.net/v2/validate?api_key=${apiKey}&email=${encodeURIComponent(email)}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log('Email validation response:', data); // Log the response for debugging
+
+            // Check the status of the email
+            if (data.status === 'valid') {
+                return true;
+            } else {
+                console.log('Email validation status:', data.status); // Log the status for debugging
+                return false; // Invalid or invalid email
+            }
+        } catch (error) {
+            console.error('Error validating email:', error);
+            alert("Error validating email: " + error.message);
+            return false;
+        }
     }
 });
