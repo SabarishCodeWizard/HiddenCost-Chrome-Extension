@@ -214,3 +214,108 @@ a {
   font-size: 18px;
   margin-bottom: 10px;
 }
+
+/* animate */
+.text-animate {
+  position: relative;
+}
+
+.text-animate h3 {
+  font-size: 25px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: .7px var(--main-color);
+  background-image: -webkit-linear-gradient(var(--main-color));
+  background-image: linear-gradient(var(--main-color), var(--main-color));
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-position: 0 0;
+  text-align: center;
+  animation: homeBgText 6s linear infinite;
+  animation-delay: 1.45s;
+}
+
+.text-animate h3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 2px solid var(--main-color);
+  z-index: -1;
+  animation: homeCursorText 6s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes homeBgText {
+  0%, 10%, 100% {
+    background-position: -33rem 0;
+  }
+  65%, 85% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes homeCursorText {
+  0%, 10%, 100% {
+    width: 0;
+  }
+  65%, 85% {
+    width: 100%;
+    opacity: 1;
+  }
+  75%, 81% {
+    opacity: 0;
+  }
+}
+
+
+
+
+.box {
+  width: 100%;
+  margin: 10px 10px 20px 10px ;
+  position: relative;
+}
+
+.box input {
+  width: 80%;
+  height: 25px;
+  padding: 10px;
+  border: 1px solid #ffffff40;
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  outline: none;
+  color: #fff;
+  font-size: 1em;
+}
+
+.box span {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  transition: 0.2s;
+}
+
+.box input:valid ~ span,
+.box input:focus ~ span {
+  color: var(--main-color);
+  transform: translateX(10px) translateY(-30px);
+  font-size: 0.75em;
+  padding: 0 5px;
+  background-color: var(--bg-color);
+  border-left: 1px solid var(--main-color);
+  border-right: 1px solid var(--main-color);
+}
+
+.box input:valid,
+.box input:focus {
+  border: 1px solid var(--main-color);
+}
