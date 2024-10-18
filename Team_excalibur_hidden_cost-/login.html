@@ -1,3 +1,5 @@
+<!-- login.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +24,11 @@
       <button type="submit">Login</button>
     </form>
 
+    <!-- forgot password -->
+    <div class="forgot-password-container">
+      <a href="#" id="forgot-password-link">Forgot Password?</a>
+    </div>
+    
     <div class="separator">or</div>
 
     <button id="google-signin" class="google-btn">
@@ -42,7 +49,7 @@
   <script src="firebase-init.js"></script>
   <script src="auth.js"></script>
   <script src="firebase/crypto-js.min.js"></script>
-  
+
   <style>
     form {
       margin: 20px;
@@ -132,6 +139,11 @@
       z-index: -1;
     }
 
+    .text-animate h3::before {
+      animation: homeCursorText 6s linear infinite;
+      animation-delay: 2s;
+    }
+
     @keyframes homeBgText {
 
       0%,
@@ -143,6 +155,27 @@
       65%,
       85% {
         background-position: 0 0;
+      }
+    }
+
+    @keyframes homeCursorText {
+
+      0%,
+      10%,
+      100% {
+        width: 0;
+      }
+ 
+      65%,
+      78%,
+      85% {
+        width: 100%;
+        opacity: 1;
+      }
+
+      75%,
+      81% {
+        opacity: 0;
       }
     }
   </style>

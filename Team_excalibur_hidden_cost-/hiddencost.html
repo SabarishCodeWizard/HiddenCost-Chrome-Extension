@@ -177,6 +177,32 @@
             margin-top: 10px;
         }
 
+        .text-animate h3::before {
+            animation: homeCursorText 6s linear infinite;
+            animation-delay: 2s;
+        }
+
+        @keyframes homeCursorText {
+
+            0%,
+            10%,
+            100% {
+                width: 0;
+            }
+
+            65%,
+            78%,
+            85% {
+                width: 100%;
+                opacity: 1;
+            }
+
+            75%,
+            81% {
+                opacity: 0;
+            }
+        }
+
         @keyframes spin {
             0% {
                 transform: rotate(0deg);

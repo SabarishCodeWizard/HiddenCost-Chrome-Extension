@@ -10,16 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const password = document.getElementById('password').value;
 
             auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                console.log('Logged in:', userCredential.user);
-                // Store user info in localStorage
-                localStorage.setItem('user', JSON.stringify({ email: userCredential.user.email }));
-                window.location.href = "popup.html"; // Redirect to popup.html
-            })
-            .catch((error) => {
-                console.error('Error logging in:', error);
-                alert("Error logging in: " + error.message);
-            });
+                .then((userCredential) => {
+                    console.log('Logged in:', userCredential.user);
+                    // Store user info in localStorage
+                    localStorage.setItem('user', JSON.stringify({ email: userCredential.user.email }));
+                    window.location.href = "popup.html"; // Redirect to popup.html
+                })
+                .catch((error) => {
+                    console.error('Error logging in:', error);
+                    alert("Error logging in: " + error.message);
+                });
         });
     }
 
@@ -30,25 +30,31 @@ document.addEventListener('DOMContentLoaded', function () {
             const provider = new firebase.auth.GoogleAuthProvider();
 
             auth.signInWithPopup(provider)
-            .then((result) => {
-                console.log('Google sign-in:', result.user);
-                // Store user info in localStorage
-                localStorage.setItem('user', JSON.stringify({ email: result.user.email }));
-                window.location.href = "popup.html"; // Redirect to popup.html
-            })
-            .catch((error) => {
-                console.error('Error during Google sign-in:', error);
-                alert("Error during Google sign-in: " + error.message);
-            });
+                .then((result) => {
+                    console.log('Google sign-in:', result.user);
+                    // Store user info in localStorage
+                    localStorage.setItem('user', JSON.stringify({ email: result.user.email }));
+                    window.location.href = "popup.html"; // Redirect to popup.html
+                })
+                .catch((error) => {
+                    console.error('Error during Google sign-in:', error);
+                    alert("Error during Google sign-in: " + error.message);
+                });
         });
     }
+
+
+    // Register form
+
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const username = document.getElementById('username').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
+            const phone = document.getElementById('phone').value;
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match');
@@ -80,13 +86,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 await userDoc.set({
                     email: email,
                     uid: userCredential.user.uid,
+                    username: username,
+                    phone: phone,
                 });
 
                 console.log('Registered:', userCredential.user);
-                alert("Registration successful! Redirecting to the main page...");
+                alert("Registration successful! Redirecting to the login page...");
 
                 // Redirect to popup.html after successful registration
-                window.location.href = "popup.html";
+                window.location.href = "login.html";
             } catch (error) {
                 console.error('Error registering:', error);
                 alert("Error registering: " + error.message);
@@ -94,6 +102,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Forgot Password functionality
+    const forgotPasswordLink = document.getElementById('forgot-password-link');
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            if (!email) {
+                alert('Please enter your email to reset your password.');
+                return;
+            }
+
+            // Send a password reset email
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    alert('Password reset email sent! Check your inbox.');
+                })
+                .catch((error) => {
+                    console.error('Error sending password reset email:', error);
+                    alert("Error: " + error.message);
+                });
+        });
+    }
+    
     // Function to validate email using ZeroBounce API
     async function validateEmailWithZeroBounce(email) {
         const apiKey = 'fd9b5c9bf5c14840930b8a87c96e454f'; // Replace with your ZeroBounce API Key

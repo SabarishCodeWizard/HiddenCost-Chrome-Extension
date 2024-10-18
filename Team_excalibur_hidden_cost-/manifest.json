@@ -52,5 +52,9 @@
                 "<all_urls>"
             ]
         }
-    ]
+    ],
+    "oauth2": {
+        "client_id": "999223446706-scu89far5qpqemasvuqu5jrhj9lcgs6a.apps.googleusercontent.com",
+        "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
+    }
 }
