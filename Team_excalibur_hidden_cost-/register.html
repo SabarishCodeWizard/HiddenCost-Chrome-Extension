@@ -20,9 +20,23 @@
     <form id="register-form">
       <input type="text" id="username" placeholder="Username" required />
       <input type="email" id="register-email" placeholder="Email" required />
-      <input type="tel" id="phone" placeholder="Phone Number" required /> 
-      <input type="password" id="register-password" placeholder="Password" required />
-      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <!-- Password field with hide/show eye for registration password -->
+      <div class="password-container">
+        <input type="password" id="register-password" placeholder="Password" required />
+        <span class="toggle-password" id="toggle-register-password">
+          <img src="eye-icon.png" alt="Show Password" id="eye-icon-register" />
+        </span>
+      </div>
+
+      <!-- Confirm Password field with hide/show eye -->
+      <div class="password-container">
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+        <span class="toggle-password" id="toggle-confirm-password">
+          <img src="eye-icon.png" alt="Show Password" id="eye-icon-confirm" />
+        </span>
+      </div>
+
       <button type="submit">Register</button>
     </form>
 
@@ -100,10 +114,12 @@
       border-right: 2px solid var(--main-color);
       z-index: -1;
     }
+
     .text-animate h3::before {
       animation: homeCursorText 6s linear infinite;
       animation-delay: 2s;
     }
+
     @keyframes homeBgText {
 
       0%,
@@ -127,7 +143,7 @@
       100% {
         width: 0;
       }
- 
+
       65%,
       78%,
       85% {
@@ -140,8 +156,25 @@
         opacity: 0;
       }
     }
+
+    .password-container {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .toggle-password img {
+      width: 20px;
+      height: 20px;
+    }
   </style>
-  
+
 </body>
 
 </html>
