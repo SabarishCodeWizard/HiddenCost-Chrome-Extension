@@ -1,0 +1,21 @@
+.anime h3 {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center align items vertically */
+    font-size: 35px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: .7px var(--main-color);
+    background-image: -webkit-linear-gradient(var(--main-color));
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-position: 0 0;
+    text-align: center;
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 1.45s;
+}
+
+.anime h3 img {
+    margin-right: 10px; /* Add some space between the image and text */
+}

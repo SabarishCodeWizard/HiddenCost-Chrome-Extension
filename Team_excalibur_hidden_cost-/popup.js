@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (user) {
         // Fetch username from Firestore using the email stored in localStorage
         const userDoc = await db.collection("users").doc(user.email).get();
+        
         if (userDoc.exists) {
             const username = userDoc.data().username; // Fetch the username
-            welcomeMessage.textContent = `Hi 🙋‍♂️, ${username}`; // Display username
+            welcomeMessage.innerHTML = `<img src="D:/GitHub/Team_excalibur_hidden_cost-main/Team_excalibur_hidden_cost-/hi-there.gif" alt="Welcome" style="width: 30px; height: 30px;"> ${username}`; // Display username with GIF
         } else {
-            welcomeMessage.textContent = `Hi 🙋‍♂️, User`; // Fallback if no username found
+            welcomeMessage.innerHTML = `<img src="D:/GitHub/Team_excalibur_hidden_cost-main/Team_excalibur_hidden_cost-/hi-there.gif" alt="Welcome" style="width: 30px; height: 30px;"> User`; // Fallback if no username found
         }
 
         logoutButton.style.display = 'block';
