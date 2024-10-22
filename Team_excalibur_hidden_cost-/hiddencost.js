@@ -1,3 +1,5 @@
+// hiddencost.js
+
 const loader = document.getElementById('loader');
 const resultSection = document.getElementById('result_section');
 
@@ -119,20 +121,60 @@ document.addEventListener('DOMContentLoaded', function () {
   function displayAmazonValues(result) {
     const amazonElements = ['amazonFullPrice', 'amazonProductPrices', 'amazonPriceDifference', 'discountDifference', 'amazonComparePrice', 'delivery_Amount', 'orderTotal_Amount'];
 
-    document.getElementById('amazonFullPrice').innerHTML = '<h2>MRP on Amazon:</h2><p>₹' + result.amazonFullPrice.join(', ') + '</p>';
-    document.getElementById('amazonProductPrices').innerHTML = '<h2>Displayed Prices on Amazon:</h2><p>₹' + result.amazonProductPrices.join(', ') + '</p>';
-    document.getElementById('amazonPriceDifference').innerHTML = '<h2>Correct Calculation:</h2><p>₹' + result.amazonPriceDifference.join(', ') + '</p>';
-    const amazonPriceDifference = parseFloat(result.amazonPriceDifference.join(', ').replace(/₹|,/g, '').trim());
-    const orderTotal_Amount = parseFloat(result.orderTotal_Amount.replace(/₹|,/g, '').trim());
-    const discountDifference = amazonPriceDifference - orderTotal_Amount;
-    document.getElementById('discountDifference').innerHTML = '<h2>Amazon Discount Difference:</h2><p>₹' + discountDifference.toFixed(2) + '</p>';
-    document.getElementById('delivery_Amount').innerHTML = '<h2>Amazon Delivery Amount:</h2><p>' + result.delivery_Amount + '</p>';
-    document.getElementById('orderTotal_Amount').innerHTML = '<h2>Amazon Total Amount:</h2><p>' + result.orderTotal_Amount + '</p>';
-    document.getElementById('amazonComparePrice').innerHTML = '<h1>' + result.amazonComparePrice.join(', ') + '</h1>';
+    const fullPrice = result.amazonFullPrice.join(', ');
+    const displayedPrices = result.amazonProductPrices.join(', ');
+    const priceDifference = result.amazonPriceDifference.join(', ');
+    const orderTotalAmount = result.orderTotal_Amount;
+    const deliveryAmount = result.delivery_Amount;
+    const comparePrice = result.amazonComparePrice.join(', ');
+
+    document.getElementById('amazonFullPrice').innerHTML = `<h2>MRP on Amazon:</h2><p>₹${fullPrice}</p>`;
+    document.getElementById('amazonProductPrices').innerHTML = `<h2>Displayed Prices on Amazon:</h2><p>₹${displayedPrices}</p>`;
+    document.getElementById('amazonPriceDifference').innerHTML = `<h2>Correct Calculation:</h2><p>₹${priceDifference}</p>`;
+
+    const amazonPriceDifference = parseFloat(priceDifference.replace(/₹|,/g, '').trim());
+    const discountDifference = amazonPriceDifference - parseFloat(orderTotalAmount.replace(/₹|,/g, '').trim());
+    document.getElementById('discountDifference').innerHTML = `<h2>Amazon Discount Difference:</h2><p>₹${discountDifference.toFixed(2)}</p>`;
+
+    document.getElementById('delivery_Amount').innerHTML = `<h2>Amazon Delivery Amount:</h2><p>${deliveryAmount}</p>`;
+    document.getElementById('orderTotal_Amount').innerHTML = `<h2>Amazon Total Amount:</h2><p>${orderTotalAmount}</p>`;
+    document.getElementById('amazonComparePrice').innerHTML = `<h1>${comparePrice}</h1>`;
+
     updateIconAndTextColor(result.amazonComparePrice, 'amazonComparePrice');
     toggleElementsDisplay(amazonElements, 'block');
     loader.style.display = 'none';
+
+    // Step 2: Store Data in Firestore
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.email) {
+      console.log(user); // Check if user and uid are available
+      const userDocRef = db.collection("users").doc(user.email); // Use email to reference the user's document
+
+      // Prepare the data to be stored
+      const amazonData = {
+        fullPrice: fullPrice,
+        displayedPrices: displayedPrices,
+        priceDifference: priceDifference,
+        discountDifference: discountDifference,
+        deliveryAmount: deliveryAmount,
+        orderTotalAmount: orderTotalAmount,
+        comparePrice: comparePrice,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp() // Optionally add a timestamp
+      };
+
+      // Save the data under a 'comparisons' subcollection
+      userDocRef.collection('comparisons').add(amazonData)
+        .then(() => {
+          console.log("Amazon comparison data stored successfully based on email.");
+        })
+        .catch((error) => {
+          console.error("Error storing data:", error);
+        });
+    } else {
+      console.error("User UID not found. Unable to store data in Firestore.");
+    }
   }
+
 
   function displayFlipkartValues(result) {
     const flipkartElements = ['flipkartFullPrices', 'flipkartOfferPrices', 'flipkartPriceDifference', 'flipkartdiscountDifference', 'flipkartComparePrice'];
