@@ -4,7 +4,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
     const formData = new FormData(this);
 
     try {
-        const response = await fetch('https://formspree.io/f/xvgpadov', {
+        const response = await fetch('https://formspree.io/f/xrbgbyek', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json'

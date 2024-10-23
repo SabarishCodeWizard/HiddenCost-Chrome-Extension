@@ -8,19 +8,19 @@
     font-weight: 150;
 
     margin: 0;
-  	width: 200px;
+    width: 200px;
     color: #FFFFFF;
     background-color: #041F30;
 
-	position: absolute;
-	z-index: 1;
-	bottom: 125%;
-	left: 50%;
-	margin-left: -100px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
 
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .insite-highlight-body .modal-header {
@@ -48,6 +48,6 @@
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .insite-highlight:hover .insite-highlight-body {
-	visibility: visible;
-	opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }

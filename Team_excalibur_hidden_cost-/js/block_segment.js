@@ -1,4 +1,4 @@
-var allIgnoreChildren = function(element) {
+var allIgnoreChildren = function (element) {
     if (element.children.length === 0) {
         return false;
     }
@@ -14,12 +14,12 @@ var allIgnoreChildren = function(element) {
         return true;
     }
 };
-  
-var segments = function(element) {
+
+var segments = function (element) {
     if (!element) {
         return [];
     }
-  
+
     var tag = element.tagName.toLowerCase();
     if (!ignoredElements.includes(tag) && !isPixel(element) && isShown(element)) {
         if (blockElements.includes(tag)) {
@@ -30,11 +30,11 @@ var segments = function(element) {
                 else {
                     if (getElementArea(element) / winArea > 0.3) {
                         var result = [];
-    
+
                         for (var child of element.children) {
                             result = result.concat(segments(child));
                         }
-    
+
                         return result;
                     }
                     else {
@@ -47,32 +47,32 @@ var segments = function(element) {
             }
             else {
                 var result = [];
-  
+
                 for (var child of element.children) {
                     result = result.concat(segments(child));
                 }
-  
+
                 return result;
             }
         }
         else {
             if (containsBlockElements(element, false)) {
                 var result = [];
-    
+
                 for (var child of element.children) {
                     result = result.concat(segments(child));
                 }
-  
+
                 return result;
             }
             else {
                 if (getElementArea(element) / winArea > 0.3) {
                     var result = [];
-        
+
                     for (var child of element.children) {
                         result = result.concat(segments(child));
                     }
-        
+
                     return result;
                 }
                 else {
