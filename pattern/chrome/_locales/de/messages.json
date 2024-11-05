@@ -1,0 +1,126 @@
+{
+  "extName": {
+    "message": "Pattern Highlighter",
+    "description": "Der Name der Erweiterung."
+  },
+  "extDescription": {
+    "message": "Erkennt und markiert verschiedene \"Dark Patterns\" auf Webseiten.",
+    "description": "The description of the extension."
+  },
+  "errorInvalidConfig": {
+    "message": "Die interne Pattern-Konfiguration der Erweiterung ist ungültig. Der Pattern Highlighter wird nicht gestartet.",
+    "description": "Die Fehlermeldung im Falle einer ungültigen internen Pattern-Konfiguration."
+  },
+  "buttonOnState": {
+    "message": "AN",
+    "description": "Die Anzeige beim angeschalteten Schalter im Popup."
+  },
+  "buttonOffState": {
+    "message": "AUS",
+    "description": "Die Anzeige beim ausgeschaltenen Schalter im Popup."
+  },
+  "buttonReloadPageForChange": {
+    "message": "Seite neu laden zur Änderung",
+    "description": "Text für den Button um die Seite neu zu laden, nach geändertem Aktivierungsstatus."
+  },
+  "buttonRedoPatternCheck": {
+    "message": "Pattern Highlighting wiederholen",
+    "description": "Text für den Button um das Pattern Highlighting auf der Seite zu wiederholen."
+  },
+  "headingShowPattern": {
+    "message": "Patterns anzeigen",
+    "description": "Überschrift im Popup für die Buttons um einzelne Pattern-Elemente anzuzeigen."
+  },
+  "headingFoundPatterns": {
+    "message": "Gefundene Patterns",
+    "description": "Überschrift im Popup für die Liste der gefundenen Pattern."
+  },
+  "headingSupportedPatterns": {
+    "message": "Unterstützte Pattern-Arten",
+    "description": "Überschrift im Popup für die Liste der unterstützten Pattern."
+  },
+  "textMoreInformation": {
+    "message": "Mehr Informationen zu Dark Pattern",
+    "description": "Text im Footer vor der Verlinkung zur dapde.de Webseite."
+  },
+  "infoExtensionStarted": {
+    "message": "Pattern Highlighter gestartet.",
+    "description": "Nachricht in der Konsole, wenn der Pattern Highlighter auf einer Seite gestartet wurde."
+  },
+  "infoExtensionDisabled": {
+    "message": "Der Pattern Highlighter ist für diesen Tab deaktiviert.",
+    "description": "Nachricht in der Konsole, wenn der Pattern Highlighter in einem Tab deaktiviert ist."
+  },
+  "infoNumberPatternsFound": {
+    "message": "$COUNT$ Pattern(s) wurden erkannt.",
+    "description": "Nachricht in der Konsole, wie viele Pattern erkannt wurden.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "patternCountdown_name": {
+    "message": "Countdown",
+    "description": "Name des Countdown Pattern."
+  },
+  "patternCountdown_infoUrl": {
+    "message": "https://dapde.de/de/dark-patterns/arten-und-beispiele/druck2/",
+    "description": "URL zur Erklärung des Countdown Pattern auf der dapde.de Webseite."
+  },
+  "patternCountdown_info": {
+    "message": "Countdown-Dark Patterns erwecken (wahrheitsgemäß oder fälschlicherweise) den Eindruck, eine Ware bzw. Dienstleistung ist nur noch für eine bestimmte Zeit verfügbar. Grafisch wird dies durch eine ablaufende Uhr oder Leiste verdeutlicht. Man kann zusehen, wie einem das gewünschte Gut davongleitet.",
+    "description": "Kurze Erklärung des Countdown Pattern."
+  },
+  "patternScarcity_name": {
+    "message": "Scarcity",
+    "description": "Name des Scarcity Pattern."
+  },
+  "patternScarcity_infoUrl": {
+    "message": "https://dapde.de/de/dark-patterns/arten-und-beispiele/druck2/",
+    "description": "URL zur Erklärung des Scarcity Pattern auf der dapde.de Webseite."
+  },
+  "patternScarcity_info": {
+    "message": "Das Scarcity-Pattern erweckt (wahrheitsgemäß oder fälschlicherweise) den Eindruck, eine Ware oder Dienstleistung ist nur noch in knapper Zahl verfügbar. Scarcity Patterns gibt es auch in Varianten, bei denen die angebliche Knappheit schlicht erfunden ist. Oder es wird zumindest nicht deutlich gemacht, ob sich die begrenzte Verfügbarkeit auf das Produkt insgesamt oder nur auf das Kontingent des besuchten Portals bezieht.",
+    "description": "Kurze Erklärung des Scarcity Pattern."
+  },
+  "patternSocialProof_name": {
+    "message": "Social Proof",
+    "description": "Name des Social Proof Pattern."
+  },
+  "patternSocialProof_infoUrl": {
+    "message": "https://dapde.de/de/dark-patterns/arten-und-beispiele/druck2/",
+    "description": "URL zur Erklärung des Social Proof Pattern auf der dapde.de Webseite."
+  },
+  "patternSocialProof_info": {
+    "message": "Das Social Proof-Dark Pattern setzt auf soziale Bewährtheit. Positive Produktbewertungen oder Aktivitätsmeldungen anderer Nutzer:innen werden direkt eingeblendet. Häufig sind diese Bewertungen oder Meldungen schlicht erfunden. Aber auch authentische Bewertungen oder Meldungen beeinflussen durch geschicktes Selektieren und Platzieren die Kaufentscheidung.",
+    "description": "Kurze Erklärung des Social Proof Pattern."
+  },
+  "patternForcedContinuity_name": {
+    "message": "Forced Continuity",
+    "description": "Name des Forced Continuity Pattern."
+  },
+  "patternForcedContinuity_infoUrl": {
+    "message": "https://dapde.de/de/dark-patterns/arten-und-beispiele/operativer-zwang2/",
+    "description": "URL zur Erklärung des Forced Continuity Pattern auf der dapde.de Webseite."
+  },
+  "patternForcedContinuity_info": {
+    "message": "Das Forced Continuity-Dark Pattern verlängert kostenlose oder günstig Probeabonnements automatisch – allerdings kostenpflichtig bzw. zu einem höheren Preis. Der Designtrick liegt darin, dass das Bestellformular auch optisch Kostenlosigkeit suggeriert und die (automatischen) Folgekosten verschleiert.",
+    "description": "Kurze Erklärung des Forced Continuity Pattern."
+  },
+  "showPatternState": {
+    "message": "$CURRENT$ von $TOTAL$",
+    "description": "Anzeige der Nummer des aktuellen Patterns im Popup für die Funktion 'Pattern ansehen'.",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "1"
+      },
+      "total": {
+        "content": "$2",
+        "example": "4"
+      }
+    }
+  }
+}
