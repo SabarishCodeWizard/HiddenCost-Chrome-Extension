@@ -15,6 +15,7 @@
     "host_permissions": [
         "<all_urls>"
     ],
+    "default_locale": "de",
     "background": {
         "service_worker": "background.js"
     },
@@ -27,15 +28,19 @@
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "<all_urls>",
+                "http://*/*",
+                "https://*/*"
             ],
             "js": [
                 "content.js",
                 "js/common.js",
-                "js/block_segment.js"
+                "js/block_segment.js",
+                "scripts/content.js"
             ],  
             "css": [
-                "css/insite.css"
+                "css/insite.css",
+                "stylesheets/style.css"
             ],
             "run_at": "document_end"
         }
@@ -46,10 +51,13 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "firebase/*"
+                "firebase/*",
+                "scripts/constants.js"
             ],
             "matches": [
-                "<all_urls>"
+                "<all_urls>",
+                "http://*/*",
+                "https://*/*"
             ]
         }
     ],
