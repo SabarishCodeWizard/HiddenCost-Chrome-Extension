@@ -5,22 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* Define color variables */
+        :root {
+            --bg-color: #081b29; /* Example color, adjust as needed */
+            --text-color: #E0FFFF;
+            --main-color: #00FA9A;
+            --secondary-bg-color: #112e42;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #081b29;
+                --text-color: #E0FFFF;
+                --main-color: #00FA9A;
+                --secondary-bg-color: #112e42; /* Adjust as needed */
+            }
+        }
+
+        /* Apply background styling */
         body {
-            margin: 0;
-            padding: 8px;
-            width: 300px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid #E0FFFF;
+            padding-right: 10px;
+            padding-left: 10px;
+            height: auto;
+            width: 350px;
+            margin: 0 auto;
             box-sizing: border-box;
             text-align: center;
             font-size: 0.85em;
         }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                color: white;
-                background: rgb(27, 27, 35);
-            }
-        }
-
     </style>
     <script type="module" src="popup.js"></script>
 </head>
