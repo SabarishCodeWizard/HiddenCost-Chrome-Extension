@@ -1,0 +1,143 @@
+ /* Define color variables */
+ :root {
+    --bg-color: #081b29;
+    /* Example color, adjust as needed */
+    --text-color: #E0FFFF;
+    --main-color: #00FA9A;
+    --secondary-bg-color: #112e42;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #081b29;
+        --text-color: #E0FFFF;
+        --main-color: #00FA9A;
+        --secondary-bg-color: #112e42;
+        /* Adjust as needed */
+    }
+}
+
+/* Apply background styling */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: #E0FFFF solid 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+    height: auto;
+    width: 350px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+/* animate */
+
+.text-animate {
+    position: relative;
+
+}
+
+.text-animate h3 {
+    font-size: 25px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: .7px var(--main-color);
+    background-image: -webkit-linear-gradient(var(--main-color));
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-position: 0 0;
+
+}
+
+.text-animate h3 {
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.text-animate h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: -1;
+    animation: homeCursorText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+@keyframes homeBgText {
+
+    0%,
+    10%,
+    100% {
+        background-position: -33rem 0;
+    }
+
+    65%,
+    85% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes homeCursorText {
+
+    0%,
+    10%,
+    100% {
+    width: 0;
+    }
+
+    65%,
+    85% {
+    width: 100%;
+    opacity: 1;
+    }
+
+    75%,
+    81% {
+    opacity: 0;
+    }
+}
+
+.back_button {
+    font-size: 2.4rem;
+    color: var(--main-color);
+    /* Changed from --bg-color to --main-color */
+    transition: .5s;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 100%;
+}
+
+.back_button::before {
+    content: '';
+    position: absolute;
+    margin-top: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    border-radius: 5px;
+    background: var(--main-color);
+    transform: scaleX(0);
+    transition: .5s;
+    z-index: -1;
+}
+
+.back_button:hover {
+    color: var(--bg-color);
+    /* Changed from --main-color to --bg-color */
+}
+
+.back_button:hover::before {
+    transform: scaleX(1);
+}
