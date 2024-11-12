@@ -20,7 +20,7 @@ body {
   color: var(--text-color);
   border-radius: 10px;
   overflow: hidden;
-  
+
 }
 
 .msger-header-title {
@@ -149,54 +149,54 @@ body {
   transform: scaleX(1);
 }
 
-    /* animate */
+/* animate */
 
-    .text-animate {
-      position: relative;
+.text-animate {
+  position: relative;
 
-    }
+}
 
-    .text-animate h3 {
-      font-size: 25px;
-      font-weight: 700;
-      color: transparent;
-      -webkit-text-stroke: .7px var(--main-color);
-      background-image: -webkit-linear-gradient(var(--main-color));
-      background-image: linear-gradient(var(--main-color), var(--main-color));
-      background-repeat: no-repeat;
-      -webkit-background-clip: text;
-      background-clip: text;
-      background-position: 0 0;
-      text-align: center;
+.text-animate h3 {
+  font-size: 25px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: .7px var(--main-color);
+  background-image: -webkit-linear-gradient(var(--main-color));
+  background-image: linear-gradient(var(--main-color), var(--main-color));
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-position: 0 0;
+  text-align: center;
 
-    }
+}
 
-    .text-animate h3 {
-      animation: homeBgText 6s linear infinite;
-      animation-delay: 2s;
-    }
+.text-animate h3 {
+  animation: homeBgText 6s linear infinite;
+  animation-delay: 2s;
+}
 
-    .text-animate h3::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      border-right: 2px solid var(--main-color);
-      z-index: -1;
-    }
+.text-animate h3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border-right: 2px solid var(--main-color);
+  z-index: -1;
+}
 
-    @keyframes homeBgText {
+@keyframes homeBgText {
 
-      0%,
-      10%,
-      100% {
-        background-position: -33rem 0;
-      }
+  0%,
+  10%,
+  100% {
+    background-position: -33rem 0;
+  }
 
-      65%,
-      85% {
-        background-position: 0 0;
-      }
-    }
+  65%,
+  85% {
+    background-position: 0 0;
+  }
+}

@@ -155,7 +155,8 @@ a {
   grid-row: 1;
   align-self: end;
   justify-self: center;
-  padding-bottom: 1rem;
+  margin-top: 10px;
+  margin-bottom: -20px;
 }
 
 @keyframes glow {
@@ -284,7 +285,7 @@ a {
   width: 80%;
   height: 25px;
   padding: 10px;
-  border: 1px solid #ffffff40;
+  border: 1px solid #fff;
   background-color: var(--bg-color);
   border-radius: 5px;
   outline: none;

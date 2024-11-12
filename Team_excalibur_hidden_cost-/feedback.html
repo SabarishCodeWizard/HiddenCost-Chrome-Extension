@@ -7,9 +7,11 @@
     <title>Feedback</title>
     <link rel="stylesheet" href="./css/popup.css">
     <link rel="stylesheet" href="./css/feedback.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.1/css/boxicons.min.css" />
 </head>
 
 <body>
+    <a class="back_button" href="popup.html"><i class="bx bx-left-arrow-alt"></i></a>
     <h1 class="heading">Feedback</h1>
     <p>We value your feedback! Please let us know what you think about our extension.</p>
 
@@ -28,8 +30,9 @@
 
         <label for="feedback">Your Feedback:</label><br>
         <div class="box">
-            <textarea style="background-color:#081b29;color: aliceblue ;" id="feedback" name="feedback" rows="5"
-                cols="40" placeholder="Write your feedback here..." required></textarea><br><br>
+            <textarea style="background-color:#081b29;color: aliceblue ;border: 1px solid #fff;" id="feedback"
+                name="feedback" rows="5" cols="40" placeholder="Write your feedback here..."
+                required></textarea><br><br>
         </div>
         <button class="a" type="submit">
             <span></span>
@@ -39,13 +42,10 @@
             Submit</button>
     </form>
     </form>
-
-    <footer class="footer">
-        <p><a href="popup.html">Back to Home</a></p>
-    </footer>
-
     <script src="feedback.js"></script>
     <script src="firebase/crypto-js.min.js"></script>
+
+
 </body>
 
 </html>
