@@ -188,12 +188,15 @@ export class PopupHeader extends LitElement {
      */
     render() {
         return html`
-        <h1>${brw.i18n.getMessage("extName")}</h1>
+        
         ${!constants.patternConfigIsValid ?
                 html`<h3>${brw.i18n.getMessage("errorInvalidConfig")}<h3>` : html``}
       `;
     }
 }
+
+{/* <h1>${brw.i18n.getMessage("extName")}</h1> */} // this is insert below the return html'
+
 // Define a custom element for the component so that it can be used in the HTML DOM.
 customElements.define("popup-header", PopupHeader);
 
