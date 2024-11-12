@@ -684,7 +684,6 @@ export class PopupFooter extends LitElement {
         return html`
         <div>
             ${brw.i18n.getMessage("textMoreInformation")}: <a href="https://sabarishcodewizard.github.io/DPBH-Web-Application/" target="_blank">&#128516;</a>.
-            <p><a href="popup.html">Back to Home</a></p>
         </div>
       `;
     }

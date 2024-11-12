@@ -348,7 +348,7 @@ a {
 
 .footer-right .btn,
 .footer-right .logout-btn {
-  background-color: #4CAF50;
+  background-color: #088308;
   color: white;
   padding: 10px;
   border: none;
@@ -368,7 +368,7 @@ a {
 
 .footer-right .btn:hover,
 .footer-right .logout-btn:hover {
-  background-color: #2e6f31;
+  background-color: #088308;
   width: 120px;
   padding: 10px 20px;
 }
