@@ -620,41 +620,41 @@ customElements.define("show-pattern-button", ShowPatternButtons);
  */
 
 
-// export class SupportedPatternsList extends LitElement {
-//     // CSS styles for the HTML elements in the component.
-//     static styles = [
-//         sharedStyles,
-//         patternsListStyles,
-//         patternLinkStyles,
-//         css`
-//             div {
-//                 margin: 2.5em 0 1em;
-//             }
-//         `
-//     ];
+export class SupportedPatternsList extends LitElement {
+    // CSS styles for the HTML elements in the component.
+    static styles = [
+        sharedStyles,
+        patternsListStyles,
+        patternLinkStyles,
+        css`
+            div {
+                margin: 2.5em 0 1em;
+            }
+        `
+    ];
 
-//     /**
-//      * Render the HTML of the component.
-//      * @returns {html} HTML of the component
-//      */
-//     render() {
-//         return html`
-//         <div>
-//             <h2>${brw.i18n.getMessage("headingSupportedPatterns")}</h2>
-//             <ul>
-//                 ${constants.patternConfig.patterns.map((pattern) =>
-//             html`
-//                     <li title="${pattern.info}">
-//                         <a href="${pattern.infoUrl}" target="_blank">
-//                             ${pattern.name} (${pattern.languages.map(l => l.toUpperCase()).join(", ")})
-//                         </a>
-//                     </li>`
-//         )}
-//             </ul>
-//         </div>
-//       `;
-//     }
-// }
+    /**
+     * Render the HTML of the component.
+     * @returns {html} HTML of the component
+     */
+    render() {
+        return html`
+        <div>
+            <h2>${brw.i18n.getMessage("headingSupportedPatterns")}</h2>
+            <ul>
+                ${constants.patternConfig.patterns.map((pattern) =>
+            html`
+                    <li title="${pattern.info}">
+                        <a href="${pattern.infoUrl}" target="_blank">
+                            ${pattern.name} (${pattern.languages.map(l => l.toUpperCase()).join(", ")})
+                        </a>
+                    </li>`
+        )}
+            </ul>
+        </div>
+      `;
+    }
+}
 
 
 

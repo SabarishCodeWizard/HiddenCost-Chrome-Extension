@@ -33,9 +33,52 @@
         </div>
     </div>
     <div class="btn-box">
-        <a class="btn" style="height: 50px;width: 60px;margin-top:-10px;margin-right: 15px;" href="pattern.html">Show patterns</a>
+        <a class="btn" style="height: 50px;width: 60px;margin-top:-10px;margin-right: 15px;" href="pattern.html">Show
+            patterns</a>
     </div>
-    <a href="chatbot.html">Chatter Bot 🤓</a>
+    <div class="footer-right">
+        <a href="chatbot.html" class="chatbot-btn">
+            <i class="fas fa-robot"></i> <!-- Font Awesome icon, optional -->
+            <span>Chatter Bot 🤓</span>
+        </a>
+    </div>
+    <style>
+        .footer-right .chatbot-btn {
+            background-color: #4a90e2;
+            /* Chatbot button background color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: width 0.3s ease, padding 0.3s ease;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 40px;
+            text-decoration: none;
+            margin-bottom: 3%;
+        }
+
+        .footer-right .chatbot-btn i {
+            margin-right: 5px;
+        }
+
+        .footer-right .chatbot-btn:hover {
+            background-color: #ebd112;
+            /* Darker background on hover */
+            width: 120px;
+            padding: 10px 20px;
+        }
+
+        .footer-right .chatbot-btn span {
+            display: none;
+            margin-left: 5px;
+        }
+
+        .footer-right .chatbot-btn:hover span {
+            display: inline;
+        }
+    </style>
 
     <footer class="footer">
         <p>
@@ -44,8 +87,10 @@
         </p>
 
         <div class="footer-right">
-        <button class="btn"><i class="fas fa-comment-alt"></i><a href="feedback.html" style="text-decoration: none; color: azure;"><span>Feedback</span></a></button>
-        <button class="logout-btn" id="logout-button"  id="logout-button"><i style="margin-right: 10px;" class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+            <button class="btn"><i class="fas fa-comment-alt"></i><a href="feedback.html"
+                    style="text-decoration: none; color: azure;"><span>Feedback</span></a></button>
+            <button class="logout-btn" id="logout-button" id="logout-button"><i style="margin-right: 10px;"
+                    class="fas fa-sign-out-alt"></i><span>Logout</span></button>
         </div>
     </footer>
 

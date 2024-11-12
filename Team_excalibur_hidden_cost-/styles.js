@@ -123,7 +123,7 @@ export const onOffSwitchStyles = css`
     .onoffswitch-inner:before {
         content: "${unsafeCSS(brw.i18n.getMessage("buttonOnState"))}";
         padding-left: 10px;
-        background-color: #34A7C1;
+        background-color: #00FA9A;
         color: #FFFFFF;
     }
 
@@ -162,7 +162,7 @@ export const onOffSwitchStyles = css`
         }
     
         .onoffswitch-inner:before {
-            background-color: #33bfde;
+            background-color: #00FA9A;
             color: #000000;
         }
     }
